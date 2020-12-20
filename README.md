@@ -4,7 +4,7 @@ Développement d'un outil pour la supervision et la gestion d'un serveur. L'outi
 
 ## TO-DO
 
-* Check disk spacedisque with df
+* Check disk space with df
 
 * Check running processes for => apache - tomcat - mysql
 
