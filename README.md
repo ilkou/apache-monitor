@@ -8,7 +8,7 @@ Développement d'un outil pour la supervision et la gestion d'un serveur. L'outi
 
 * Check running processes for => apache - tomcat - mysql
 
-* Push notifications (SMS)
+* Push notifications (SMS) ==> [SMS Server Tools 3](http://smstools3.kekekasvi.com/) - needs a GSM modem
 
 * Check running apps (wget/curl)
 
