@@ -1,0 +1,2 @@
+#AssociativeArray(command_name=>command) of dependencies:
+declare -A AM_dependencies=( [Crontab]=cronie [Tomcat]=tomcat )
