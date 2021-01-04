@@ -16,7 +16,7 @@ echo "Checking running processes";
 kill -0 `cat $CATALINA_PID` > /dev/null 2>&1
 if [ $? -gt 0 ]
 then
-    echo "Check tomcat" | mailx -s "Tomcat not running" apache-monitor@gmail.com
+    echo "Check tomcat" | mailx -s "Tomcat not running" apache.monitor.ensakh@gmail.com
 fi
 
 
