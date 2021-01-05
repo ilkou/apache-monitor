@@ -16,6 +16,10 @@ sh index.sh -y
 
 * option -y: Automatic yes to prompts; assume "yes" as answer to all prompts and run non-interactively.
 
+## Env
+
+* [CentOS 7](https://pixelabs.fr/machine-virtuelle-centos-7-virtualbox/)
+
 ## TO-DO
 
 * Check disk space with df

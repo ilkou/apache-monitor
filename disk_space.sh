@@ -7,7 +7,8 @@
 #								#
 #################################################################
 
-source ./config
+source ~/.bashrc
+source $AM_LOCATION/config
 
 CURRENT=$(df / | grep / | awk '{ print $5}' | sed 's/%//g')
 

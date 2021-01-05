@@ -1,8 +1,17 @@
 #AssociativeArray(command_name=>command) of dependencies:
-declare -A AM_dependencies=( [Crontab]=cronie [Mail]=mailx [Apache]=httpd [Tomcat]=tomcat )
+declare -A AM_dependencies=(
+	[Crontab]=crontab
+	[Mail]=mailx
+	[Apache]=httpd
+	[Tomcat]=tomcat
+)
 
 #AssociativeArray(service_name=>service) of sevices to monitor:
-declare -A AM_services=( [httpd.service]=false [tomcat.service]=false [mysql]=false )
+declare -A AM_services=(
+	[httpd.service]=false
+	[tomcat.service]=false
+	[mysql]=false
+)
 
 #Percentage used to alert you when the disk is almost full
 AM_percentage=90
