@@ -55,10 +55,3 @@ check_dependency()
 for key in "${!AM_dependencies[@]}"; do
 	check_dependency $key ${AM_dependencies[$key]}
 done
-
-for key in "${!AM_services[@]}"; do
-	if systemctl list-unit-files | grep $key; then
-		AM_services[$key]=true;
-	fi
-	echo "$key => ${AM_services[$key]}";
-done

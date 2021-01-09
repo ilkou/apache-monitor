@@ -20,6 +20,8 @@ sh index.sh -y
 
 * [CentOS 7](https://pixelabs.fr/machine-virtuelle-centos-7-virtualbox/)
 
+* [Apache Web Server](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-centos-7)
+
 ## TO-DO
 
 * Check disk space with df

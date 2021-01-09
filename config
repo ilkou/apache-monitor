@@ -8,14 +8,15 @@ declare -A AM_dependencies=(
 
 #AssociativeArray(service_name=>service) of sevices to monitor:
 declare -A AM_services=(
-	[httpd.service]=false
+	[httpd]=false
 	[tomcat.service]=false
 	[mysql]=false
 )
 
 #AssociativeArray(AppLink=>strToFind)
 declare -A AM_webapps=(
-	[localhost]=hello
+	[localhost:80]=hello
+	[localhost:8080]=Congratulations
 )
 
 #Percentage used to alert you when the disk is almost full

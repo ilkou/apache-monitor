@@ -7,6 +7,8 @@
 #								#
 #################################################################
 
+source ./config
+
 AM_auto_install=false;
 
 AM_color_black=$(tput setaf 0)
@@ -70,6 +72,15 @@ printf "${AM_color_blue}[INFO] Apache-monitor will verify if a string exist with
 printf "[INFO] You can set the links to pages and their corresponding string verification in the ./config file\n"
 printf "[INFO] Apache-monitor won\'t verify firewall rules, therefore they need to be configured manually (enable a port for outside connections)\n${AM_color_normal}"
 set_cron $check_apps_location
+
+# Setting availabled services to monitor
+
+#for key in "${!AM_services[@]}"; do
+#	if systemctl list-unit-files | grep $key; then
+#		AM_services[$key]=true;
+#	fi
+#	echo "$key => ${AM_services[$key]}";
+#done
 
 # Check running processes
 check_processes_location="sh $(pwd)/processes.sh"
