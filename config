@@ -1,7 +1,7 @@
 #AssociativeArray(command_name=>command) of dependencies:
 declare -A AM_dependencies=(
 	[Crontab]=crontab
-	[Mail]=mailx
+	[PHP]=php
 	[Apache]=httpd
 	[Tomcat]=tomcat
 )
