@@ -7,6 +7,17 @@ fi
 
 commnd=$1
 cron_file="/var/spool/cron/root"
+
+cron_exist()
+{
+	if [[ $(cat $cron_file | grep "$1") ]]
+	then
+		return 1 
+	else
+		return 0
+	fi
+}
+
 if [ -z "$2" ]
 then
 	printf "\n\t(1) Run task occasionally (specific entry)    "
@@ -30,27 +41,39 @@ then
 				break
 				;;
 			2)
-				echo "@yearly $commnd" >> $cron_file
+				if cron_exist "@yearly $commnd" ; then
+					echo "@yearly $commnd" >> $cron_file
+				fi
 				break
 				;;
 			3)
-				echo "@monthly $commnd" >> $cron_file
+				if cron_exist "@monthly $commnd" ; then
+					echo "@monthly $commnd" >> $cron_file
+				fi
 				break
 				;;
 			4)
-				echo "@weekly $commnd" >> $cron_file
+				if cron_exist "@weekly $commnd" ; then
+					echo "@weekly $commnd" >> $cron_file
+				fi
 				break
 				;;
 			5)
-				echo "@daily $commnd" >> $cron_file
+				if cron_exist "@daily $commnd" ; then
+					echo "@daily $commnd" >> $cron_file
+				fi
 				break
 				;;
 			6)
-				echo "@hourly $commnd" >> $cron_file
+				if cron_exist "@hourly $commnd" ; then
+					echo "@hourly $commnd" >> $cron_file
+				fi
 				break
 				;;
 			7)
-				echo "@reboot $commnd" >> $cron_file
+				if cron_exist "@reboot $commnd" ; then
+					echo "@reboot $commnd" >> $cron_file
+				fi
 				break
 				;;
 			*)
@@ -61,7 +84,9 @@ then
 else
 	if [ $2 == "@every_min" ]
 	then
-		echo "* * * * * $commnd" >> $cron_file
+		if cron_exist "* * * * * $commnd" ; then
+			echo "* * * * * $commnd" >> $cron_file
+		fi
 	else
 		echo "Usage: ./set_cron_job.sh command_to_run @every_min"
 		exit;

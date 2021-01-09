@@ -13,5 +13,10 @@ declare -A AM_services=(
 	[mysql]=false
 )
 
+#AssociativeArray(AppLink=>strToFind)
+declare -A AM_webapps=(
+	[localhost]=hello
+)
+
 #Percentage used to alert you when the disk is almost full
 AM_percentage=90

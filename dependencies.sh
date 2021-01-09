@@ -34,12 +34,14 @@ check_dependency()
 	then
 		echo "=> $AM_command_name: could not be found !";
 		if [ "$AM_auto_install" = false ] ; then
-			read -p "Do you want to install $AM_command_name ? " yn
-			while true; do
+			printf "Do you want to install $AM_command_name ? "
+			while :
+			do
+				read yn
 				case $yn in
 					[Yy]* ) eval "yum install $AM_command -y" ; break;;
 					[Nn]* ) echo "Apache-monitor depends on it !"; exit;;
-					* ) echo "Please answer yes or no.";;
+					* ) printf "Please answer yes or no [yn]:  ";;
 				esac
 			done
 		else
