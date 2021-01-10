@@ -30,8 +30,7 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="js/jquery-3.1.1.min.js"></script>
-
+<script src="<?php echo WEB_ROOT ?>js/jquery-3.1.1.min.js"></script>
 
 
 <!-- Flot demo data -->

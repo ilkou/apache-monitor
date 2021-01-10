@@ -1,7 +1,7 @@
 <div class="col-lg-12">
     <div class="ibox ">
         <div class="ibox-title">
-            <h5>Disk usage </h5>
+            <h5>Network usage </h5>
             <div class="ibox-tools">
                 <a class="collapse-link">
                     <i class="fa fa-chevron-up"></i>
@@ -22,7 +22,7 @@
         </div>
         <div class="ibox-content">
             <div class="flot-chart">
-                <div class="flot-chart-content" id="flot-line-chart-multi"></div>
+                <div class="flot-chart-content" id="flot-line-chart-multi2"></div>
             </div>
         </div>
     </div>
@@ -994,7 +994,7 @@
         }
 
         function doPlot(position) {
-            $.plot($("#flot-line-chart-multi"), [{
+            $.plot($("#flot-line-chart-multi2"), [{
                 data: oilprices,
                 label: "Oil price ($)"
             }, {

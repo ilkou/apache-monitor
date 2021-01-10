@@ -35,11 +35,8 @@
 
 <?php include('cpu.php');?>
 <?php include('disk.php');?>
-
-
-
-
-
+<?php include('ram.php');?>
+<?php include('network.php');?>
 <script src="<?php echo WEB_ROOT; ?>js/plugins/guage/gauge.min.js"></script>
 <script>
     var cpu = Gauge(
@@ -49,6 +46,9 @@
             dialStartAngle: 180,
             dialEndAngle: 0,
             value: 90,
+            label: function(value) {
+                return 2.5 + "Gb";
+            },
             viewBox: "0 0 100 57",
             color: function(value) {
                 if (value < 20) {
@@ -91,7 +91,7 @@
             max: 100,
             value: 30,
             label: function(value) {
-                return Math.round(value) + "/" + this.max;
+                return Math.round(value);
             },
             color: function(value) {
                 if (value < 20) {
@@ -112,7 +112,8 @@
             max: 100,
             value: 50,
             label: function(value) {
-                return Math.round(value) + "/" + this.max;
+                return 
+                return Math.round(value);
             },
             color: function(value) {
                 if (value < 20) {
@@ -133,7 +134,7 @@
             max: 100,
             value: 20,
             label: function(value) {
-                return Math.round(value) + "/" + this.max;
+                return Math.round(value);
             },
             color: function(value) {
                 if (value < 20) {
@@ -154,7 +155,7 @@
             max: 100,
             value: 60,
             label: function(value) {
-                return Math.round(value) + "/" + this.max;
+                return Math.round(value) ;
             },
             color: function(value) {
                 if (value < 20) {

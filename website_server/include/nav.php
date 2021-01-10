@@ -8,7 +8,7 @@
 
 		<ul class="nav navbar-top-links navbar-right">
 			<li style="padding: 20px">
-				<span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+				<span class="m-r-sm text-muted welcome-message">Welcome to server monitoring</span>
 			</li>
 			<li class="dropdown">
 				<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -44,7 +44,7 @@
 					<li>
 						<div class="dropdown-messages-box">
 							<a class="dropdown-item float-left" href="profile.html">
-								<img alt="image" class="rounded-circle" src="img/profile.jpg">
+								<img alt="image" class="rounded-circle" src="<?php  echo WEB_ROOT ?>img/profile.jpg">
 							</a>
 							<div class="media-body ">
 								<small class="float-right">23h ago</small>
