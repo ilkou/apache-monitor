@@ -1,8 +1,5 @@
 <?php
 ini_set('display_errors', 'on');
-//ob_start("ob_gzhandler");
-//error_reporting(E_ALL);
-
 // start the session
 session_start();
 
@@ -12,11 +9,6 @@ $dbHost = 'localhost';
 $dbUser = 'rahimi';
 $dbPass = 'rahimi1498';
 $dbName = 'telaction';
-
-// $dbHost = 'eu-cdbr-west-03.cleardb.net';
-// $dbUser = 'b5c151ec4be64e';
-// $dbPass = 'e8535c66';
-// $dbName = 'heroku_b2d33a0075c36b6';
 
 
 

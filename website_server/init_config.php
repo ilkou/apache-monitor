@@ -45,28 +45,61 @@ if (isset($_POST['login']) && isset($_POST['pwd'])) {
                     </div>
                     <div class="ibox-content">
                         <form method="post">
-                            <div class="form-group  row"><label class="col-sm-2 col-form-label">Username :</label>
-                                <div class="col-sm-10"><input type="text" class="form-control"></div>
-                            </div>
+                            <input type="text" value="dsdsdsd" hidden>
 
-                            <div class="form-group  row"><label class="col-sm-2 col-form-label">email :</label>
-                                <div class="col-sm-10"><input type="email" placeholder="Enter email" class="form-control"></div>
-                            </div>
-
-                            <div class="form-group row"><label class="col-sm-2 col-form-label">Password :</label>
-                                <div class="col-sm-10"><input type="password" class="form-control" name="password"></div>
-                            </div>
-
-                            <div class="form-group row"><label class="col-sm-2 col-form-label">Verify Password :</label>
-
-                                <div class="col-sm-10"><input type="password" class="form-control" name="password"></div>
-                            </div>
-
-                            <div class="form-group  row"><label class="col-sm-2 col-form-label">Databese name :</label>
-                                <div class="col-sm-10"><input type="text" class="form-control">
-                                    <span class="form-text m-b-none"><strong>NB</strong> : the old datebase will automaticly removed</span>
+                            <div class="form-group  row"><label class="col-sm-3 col-form-label">Databese name :</label>
+                                <div class="col-sm-9"><input type="text" value="db_ensak-server_monitoring" class="form-control">
+                                    <span class="form-text m-b-none"><strong>NB</strong> : the old datebase with the same name will automaticly removed</span>
                                 </div>
                             </div>
+                            <div class="form-group  row"><label class="col-sm-3 col-form-label">tables prefix :</label>
+                                <div class="col-sm-9"><input type="text" value="esm" placeholder="ensak-server_monitoring" class="form-control">
+                                    <span class="form-text m-b-none"><strong>NB</strong> : the old tables with the same names will automaticly removed</span>
+                                </div>
+                            </div>
+                            <div class="form-group row"><label class="col-sm-3 col-form-label">Database Host :</label>
+                                <div class="col-sm-9"><input type="text" value="localhost" class="form-control" name="password">
+                                </div>
+                            </div>
+                            <div class="form-group  row"><label class="col-sm-3 col-form-label">Database Username :</label>
+                                <div class="col-sm-9"><input type="text"  value="root"  class="form-control">
+                                    <span class="form-text m-b-none">The Username of the database</span>
+                                </div>
+                            </div>
+                            <div class="form-group row"><label class="col-sm-3 col-form-label">Database Password :</label>
+                                <div class="col-sm-9"><input type="password" class="form-control" name="password">
+                                    <span class="form-text m-b-none">The Password of the database</span>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="hr-line-dashed"></div>
+
+
+
+                            <div class="form-group  row"><label class="col-sm-3 col-form-label">Username :</label>
+                                <div class="col-sm-9"><input type="text" class="form-control">
+                                    <span class="form-text m-b-none">the username </span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group  row"><label class="col-sm-3 col-form-label">email :</label>
+                                <div class="col-sm-9"><input type="email" placeholder="Enter email" class="form-control"></div>
+                            </div>
+
+                            <div class="form-group row"><label class="col-sm-3 col-form-label">Password :</label>
+                                <div class="col-sm-9"><input type="password" class="form-control" name="password"></div>
+                            </div>
+
+                            <div class="form-group row"><label class="col-sm-3 col-form-label">Verify Password :</label>
+
+                                <div class="col-sm-9"><input type="password" class="form-control" name="password"></div>
+                            </div>
+
 
                             <div class="hr-line-dashed"></div>
                             <div class="form-group row">

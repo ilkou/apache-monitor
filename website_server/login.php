@@ -44,6 +44,7 @@ if (isset($_POST['login']) && isset($_POST['pwd'])) {
             <p></p>
             <p>Login in. To access to your server.</p>
             <form class="m-t" role="form" action="index.html">
+            <input type="text" value="dsdsdsd" hidden>
                 <div class="form-group">
                     <input type="email" class="form-control" placeholder="Username" required="">
                 </div>

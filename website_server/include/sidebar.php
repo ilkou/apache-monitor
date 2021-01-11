@@ -16,14 +16,20 @@
                             </ul>
                         </div>
                         <div class="logo-element">
-                            IN+
+                            ESM
                         </div>
                     </li>
                     <li class="active">
                         <a href="<?php echo WEB_ROOT ?>views/?v=dashboard"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a>
                     </li>
                     <li>
-                        <a href="<?php echo WEB_ROOT ?>views/?v=services"><i class="fa fa-diamond"></i> <span class="nav-label">services</span></a>
+                        <a href="<?php echo WEB_ROOT ?>views/?v=services"><i class="fa fa-cogs"></i> <span class="nav-label">services</span></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo WEB_ROOT ?>views/?v=configuration"><i class="fa fa-wrench"></i> <span class="nav-label">configuration</span></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo WEB_ROOT ?>views/?v=change_password"><i class="fa fa-key"></i> <span class="nav-label">change password</span></a>
                     </li>
                     <!-- <li class="landing_link">
                         <a target="_blank" href="landing.html"><i class="fa fa-star"></i> <span class="nav-label">Landing Page</span> <span class="label label-warning float-right">NEW</span></a>

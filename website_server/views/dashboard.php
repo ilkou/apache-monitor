@@ -6,25 +6,32 @@
         <h4 class="m-b-xxs">System Overview</h4>
         <div class="d-flex justify-content-center">
             <div class="col-sm-4">
+            
                 <div id="cpu" class="gauge-container"></div>
+                CPU
             </div>
         </div>
         <div>
             <div class="row">
                 <div class="col-sm-3">
                     <div id="disk_read" class="gauge-container"></div>
+                    Disk Read
                 </div>
                 <div class="col-sm-2">
                     <div id="disk_write" class="gauge-container"></div>
+                    Disk Write
                 </div>
                 <div class="col-sm-2">
                     <div id="ipv4_inbound" class="gauge-container"></div>
+                    Ipv4 Inbound
                 </div>
                 <div class="col-sm-2">
                     <div id="ipv4_outbound" class="gauge-container"></div>
+                    Ipv4 Outbound
                 </div>
                 <div class="col-sm-3">
                     <div id="used_ram" class="gauge-container"></div>
+                    Used Ram
                 </div>
 
             </div>
@@ -112,7 +119,6 @@
             max: 100,
             value: 50,
             label: function(value) {
-                return 
                 return Math.round(value);
             },
             color: function(value) {

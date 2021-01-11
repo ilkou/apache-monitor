@@ -210,7 +210,17 @@ if (!defined('WEB_ROOT')) {
   });
 </script>
 <script src="<?php  echo WEB_ROOT ?>js/plugins/flot/jquery.flot.time.js"></script>
+<script src="<?php echo WEB_ROOT ?>js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
 
-
+<script>
+         $("#ionrange_3").ionRangeSlider({
+            skin: "flat",
+            min: 0,
+            max: 100,
+            from: 80,
+            postfix: "%",
+            grid: true
+        });
+</script>
 
 </html>
