@@ -24,11 +24,11 @@ sh index.sh -y
 
 ## TO-DO
 
-* Check disk space with df ✅
+* Check disk space with df ✅ => disk free
 
 * Check running processes for => apache - tomcat - mysql ✅
 
-* Push notifications (SMS) ❌
+* Push notifications (SMS) ❌ => platform API integration
 
 * Check running apps (wget/curl) ✅
 
