@@ -43,7 +43,15 @@ sh index.sh -y
 
 * email-to-sms gateway
 
+* [Free SMS APIs](https://rapidapi.com/collection/free-sms-apis)
+
 * [Twilio](https://www.twilio.com/sms)
+
+* [VONAGE API](https://dashboard.nexmo.com/getting-started/sms)
+
+* [D7SMS API](https://dashboard.d7networks.com/)
+
+* [SMS77](https://app.sms77.io/)
 
 ### Inspiration
 
