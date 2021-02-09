@@ -49,3 +49,8 @@ sh index.sh -y
 
 * [Monit](https://mmonit.com/monit/#screenshots) - screenshots of the tool
 
+### JQ (json filter)
+
+* [JQ filter](https://jqplay.org/)
+
+* [JQ Home](https://stedolan.github.io/jq/)
