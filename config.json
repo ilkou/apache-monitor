@@ -1,11 +1,44 @@
 {
-    "dependencies": ["cron", "php", "jq", "webhook"],
-    "services": ["httpd", "tomcat.service", "mysql"],
-    "apps": [
-	    ["url1", "verfiy string1"],
-	    ["url2", "verfiy string1"]
-    ],
-    "percentage": "90",
-    "sms_api_token": "sfjsdnlf",
-    "sms_api_tel": "+212655xxxxxx"
+	"dependencies": [
+		{
+			"jq": [
+				"yum install epel-release -y",
+				"yum install jq -y"
+			]
+		},
+		{
+			"cron": [
+				"yum install cron"
+			]
+		},
+		{
+			"php": [
+				"yum install php"
+			]
+		},
+		{
+			"webhook": [
+			"yum install epel-release",
+			"yum install snapd",
+			"systemctl enable --now snapd.socket",
+			"ln -s /var/lib/snapd/snap /snap",
+			"snap install webhook"
+			]
+		}
+	],
+	"services": [
+		"httpd",
+		"tomcat.service",
+		"mysql"
+	],
+	"apps": [
+		{
+			"url1": "verfiy string1"
+		},
+		{
+			"url2": "verfiy string1"
+		}
+	],
+	"percentage": "90",
+	"sms_api_token": "sfjsdnlf"
 }
