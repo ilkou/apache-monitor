@@ -1,0 +1,11 @@
+{
+    "dependencies": ["cron", "php", "jq", "webhook"],
+    "services": ["httpd", "tomcat.service", "mysql"],
+    "apps": [
+	    ["url1", "verfiy string1"],
+	    ["url2", "verfiy string1"]
+    ],
+    "percentage": "90",
+    "sms_api_token": "sfjsdnlf",
+    "sms_api_tel": "+212655xxxxxx"
+}

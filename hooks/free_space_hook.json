@@ -1,0 +1,15 @@
+[
+	{
+		"id": "f",
+		"execute-command": "/home/ilkou/apache-monitor/free_space.sh",
+		"command-working-directory": "/home/ilkou/apache-monitor",
+		"response-message": "Apache-monitor: Free Up Space",
+		"pass-arguments-to-command":
+		[
+			{
+				"source": "url",
+				"name": "token"
+			}
+		]
+	}
+]
