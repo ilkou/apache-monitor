@@ -8,7 +8,7 @@
 		},
 		{
 			"cron": [
-				"yum install cron"
+				"yum install cronie"
 			]
 		},
 		{
@@ -17,12 +17,19 @@
 			]
 		},
 		{
+			"Go": [
+				"curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash",
+				"source ~/.bashrc"
+			]
+		},
+		{
+			"Git": [
+				"yum install git"
+			]
+		},
+		{
 			"webhook": [
-			"yum install epel-release",
-			"yum install snapd",
-			"systemctl enable --now snapd.socket",
-			"ln -s /var/lib/snapd/snap /snap",
-			"snap install webhook"
+				"go get github.com/adnanh/webhook"
 			]
 		}
 	],
@@ -30,33 +37,42 @@
 		{
 			"service": "httpd",
 			"status": "enabled",
-			"": ""
+			"state": "started",
+			"notified": "no"
 		},
 		{
 			"service": "tomcat.service",
 			"status": "enabled",
-			"": ""
+			"state": "started",
+			"notified": "no"
 		},
 		{
 			"service": "mysql",
-			"status": "enabled",
-			"":""
+			"status": "disabled",
+			"state": "started",
+			"notified": "no"
 		}	
 	],
 	"apps": [
 		{
 			"name": "app1",
 			"url": "urlX",
-			"string": "verfiy string1"
+			"string": "verfiy string1",
+			"status": "up",
+			"notified": "no"
 		},
 		{
 			"name": "app2",
 			"url": "urlY",
-			"string": "verfiy string2"
+			"string": "verfiy string2",
+			"status": "down",
+			"notified": "no"
 		}
 	],
+	"disk_space_notified": "no",
 	"percentage": "90",
 	"email": "apache.monitor.ensakh@gmail.com",
-	"sms_api_token": "sfjsdnlf",
-	"sms_api_tel": "+212655246226"
+	"sms_api_token": "dnZzbjcwNjM6MjVTeDgwSGM=",
+	"sms_api_tel": "+212655246226",
+	"cron_location": "\/var\/spool\/cron\/root"
 }

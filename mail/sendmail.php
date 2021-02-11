@@ -27,16 +27,16 @@ try {
     //Recipients
     $mail->setFrom('elmehdirahimi98@gmail.com', 'Mailer');
     $mail->addAddress('elmehdirahimi98@gmail.com', 'Joe User');     // Add a recipient
-    $mail->addAddress('elmehdirahimi@gmail.com');               // Name is optional
-    $mail->addReplyTo('elmehdirahimi@gmail.com', 'Information');
+    $mail->addAddress(argv[1]);               // Name is optional
+    $mail->addReplyTo(argv[1], 'Information');
     $mail->addCC('cc@example.com');
     $mail->addBCC('bcc@example.com');
 
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->Subject = argv[2];
+    $mail->Body    = argv[3];
+    $mail->AltBody = argv[4];
 
     $mail->send();
     echo 'Message has been sent';
