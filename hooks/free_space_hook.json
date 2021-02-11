@@ -1,14 +1,19 @@
 [
 	{
+		"usage": "<IP-ADDRESS>:1337/hooks/f?t=12345&f=1",
 		"id": "f",
-		"execute-command": "/home/ilkou/apache-monitor/free_space.sh",
-		"command-working-directory": "/home/ilkou/apache-monitor",
+		"execute-command": "$AM_LOCATION/scripts/free_space.sh",
+		"command-working-directory": "$AM_LOCATION",
 		"response-message": "Apache-monitor: Free Up Space",
 		"pass-arguments-to-command":
 		[
 			{
 				"source": "url",
-				"name": "token"
+				"name": "t"
+			},
+			{
+				"source": "url",
+				"name": "f"
 			}
 		]
 	}

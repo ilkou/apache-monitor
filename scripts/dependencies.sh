@@ -8,12 +8,13 @@
 #################################################################
 # Script shell to check dependencies for Apache-monitor tool
 
-source ./config
+source ~/.bashrc
 
 echo "Checking dependencies for Apache-monitor tool";
 
-yum install epel-release -y
-yum install jq -y
+#sudo yum update -y
+sudo yum install epel-release -y
+sudo yum install jq -y
 
 AM_auto_install=false;
 
@@ -30,7 +31,8 @@ done
 
 check_dependency()
 {
-	AM_command=$(cat test.json | jq ".dependencies[$1] | keys[]")
+	source ~/.bashrc
+	AM_command=$(cat $AM_LOCATION/config.json | jq ".dependencies[$1] | keys[]")
 	echo "Checking $AM_command command...";
 	if ! command -v $AM_command &> /dev/null
 	then
@@ -42,11 +44,11 @@ check_dependency()
 				read yn
 				case $yn in
 					[Yy]* ) 
-						COMMANDS_LENGTH=$(cat config.json | jq ".dependencies[$1][] | length")
+						COMMANDS_LENGTH=$(cat $AM_LOCATION/config.json | jq ".dependencies[$1][] | length")
 						for (( col=0; col<$COMMANDS_LENGTH; col++ ))
 						do
-							command=$(cat config.json | jq -r ".dependencies[$1][] | .[$col]")
-							eval "sudo $command"
+							command=$(cat $AM_LOCATION/config.json | jq -r ".dependencies[$1][] | .[$col]")
+							eval "$command"
 						done
 						break;;
 					[Nn]* ) echo "Apache-monitor depends on it !"; exit;;
@@ -54,11 +56,11 @@ check_dependency()
 				esac
 			done
 		else
-			COMMANDS_LENGTH=$(cat config.json | jq ".dependencies[$1][] | length")
+			COMMANDS_LENGTH=$(cat $AM_LOCATION/config.json | jq ".dependencies[$1][] | length")
 			for (( col=0; col<$COMMANDS_LENGTH; col++ ))
 			do
-				command=$(cat config.json | jq -r ".dependencies[$1][] | .[$col]")
-				eval "sudo $command"
+				command=$(cat $AM_LOCATION/config.json | jq -r ".dependencies[$1][] | .[$col]")
+				eval "$command"
 			done
 		fi
 	else
@@ -66,9 +68,9 @@ check_dependency()
 	fi
 }
 
-DEPENDENCIES_LENGTH=$(cat config.json | jq '.dependencies | length')
+DEPENDENCIES_LENGTH=$(cat $AM_LOCATION/config.json | jq '.dependencies | length')
 
-for (( row=0; row<$DEPENDENCIES_LENGTH; row++ ))
+for (( row=1; row<$DEPENDENCIES_LENGTH; row++ ))
 do
 	check_dependency $row
 done

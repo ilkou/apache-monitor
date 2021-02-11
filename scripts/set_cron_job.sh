@@ -1,4 +1,7 @@
 #!/bin/sh
+
+source ~/.bashrc
+
 if [ -z "$1" ]
 then
 	echo "Usage: ./set_cron_job.sh command_to_run"
@@ -6,7 +9,7 @@ then
 fi
 
 commnd=$1
-cron_file="/var/spool/cron/root"
+cron_file=$(cat $AM_LOCATION/config.json | jq -r '.cron_location')
 
 cron_exist()
 {

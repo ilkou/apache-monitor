@@ -62,3 +62,9 @@ sh index.sh -y
 * [JQ filter](https://jqplay.org/)
 
 * [JQ Home](https://stedolan.github.io/jq/)
+
+### Test some features with docker
+
+`
+docker run -v /path/to/apache-monitor/:/apache-monitor -it --rm --name apache-monitor centos:7
+`
