@@ -27,18 +27,36 @@
 		}
 	],
 	"services": [
-		"httpd",
-		"tomcat.service",
-		"mysql"
+		{
+			"service": "httpd",
+			"status": "enabled",
+			"": ""
+		},
+		{
+			"service": "tomcat.service",
+			"status": "enabled",
+			"": ""
+		},
+		{
+			"service": "mysql",
+			"status": "enabled",
+			"":""
+		}	
 	],
 	"apps": [
 		{
-			"url1": "verfiy string1"
+			"name": "app1",
+			"url": "urlX",
+			"string": "verfiy string1"
 		},
 		{
-			"url2": "verfiy string1"
+			"name": "app2",
+			"url": "urlY",
+			"string": "verfiy string2"
 		}
 	],
 	"percentage": "90",
-	"sms_api_token": "sfjsdnlf"
+	"email": "apache.monitor.ensakh@gmail.com",
+	"sms_api_token": "sfjsdnlf",
+	"sms_api_tel": "+212655246226"
 }
