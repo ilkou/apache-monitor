@@ -1,5 +1,6 @@
 <?php
 
+
 require_once '../library/config.php';
 require_once '../library/functions.php';
 
@@ -7,34 +8,26 @@ $cmd = isset($_GET['cmd']) ? $_GET['cmd'] : '';
 
 switch ($cmd) {
 
-	case 'create':
-		createUser();
-		break;
-
-	case 'updateUser':
-		updateUser();
-		break;
-	case 'deleteUser':
-		deleteUser();
-		break;
-
-
 	case 'updatePwd':
 		updatePwd();
 		break;
 
-	case 'confirmerContrat':
-		confirmerContrat();
+	case 'init_config':
+		init_config();
 		break;
 
-	case 'accepterContrat':
-		accepterContrat();
+	case 'startService':
+		startService();
 		break;
-	case 'updateProject':
-		updateProject();
+	case 'stopService':
+		stopService();
 		break;
-
-
+	case 'config':
+		configuration();
+		break;
+	case 'newApp':
+		newApp();
+		break;
 	default:
 		break;
 }
@@ -44,92 +37,6 @@ switch ($cmd) {
 
 
 
-
-function createUser()
-{
-	$nom_user 		= $_POST['nom_user'];
-	$prenom_user 	= $_POST['prenom_user'];
-	$tel 		= $_POST['tel'];
-	$fonction 		= $_POST['fonction'];
-	$login		= $_POST['login'];
-	$password		=  password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-	$photo = $_POST['photo'];
-
-	list($type, $photo) = explode(';', $photo);
-	list(, $photo) = explode(',', $photo);
-
-	$photo = base64_decode($photo);
-	$photo_name = time() . '.png';
-	file_put_contents('uploads/' . $photo_name, $photo);
-
-	$photo = 'uploads/' . $photo_name;
-
-
-	$hsql	= "SELECT * FROM users WHERE login = '$login'";
-	$hresult = dbQuery($hsql);
-	if (dbNumRows($hresult) > 0) {
-		$errorMessage = 'utilisateur deja existe utiliser  un autre email/login';
-		header('Location: ../views/?v=CREATE&err=' . urlencode($errorMessage));
-		exit();
-	}
-	$sql = "INSERT INTO users (login, password,nom_user, prenom_user, tel,fonction, photo)
-			VALUES ('$login', '$password','$nom_user', '$prenom_user', '$tel','$fonction','$photo')";
-	dbQuery($sql);
-
-
-	header('Location: ../views/?v=USERS&msg=' . urlencode('L\'utilisateur est enregistré avec succès.'));
-	exit();
-}
-
-
-function updateUser()
-{
-	if ($_SESSION['crm_token'] != $_POST['token'])
-		die("Invalide token ");
-
-	$login		= $_GET['login'];
-
-	$nom_user 		= $_POST['nom_user'];
-	$prenom_user 	= $_POST['prenom_user'];
-	$tel 		= $_POST['tel'];
-	$fonction 		= $_POST['fonction'];
-
-
-
-
-
-	$type = $_SESSION['crm_fd_user']['fonction'];
-	if ($type == 'admin') {
-		$sql = "";
-		if (isset($_FILES['photo']) && $_FILES['photo']['name']) {
-			$photo = uploadFile('photo');
-			$sql	= "UPDATE users SET nom_user = '$nom_user', prenom_user = '$prenom_user',tel = '$tel', fonction = '$fonction' ,photo = '$photo' WHERE login = '$login'";
-		} else {
-			$sql	= "UPDATE users SET nom_user = '$nom_user', prenom_user = '$prenom_user',tel = '$tel', fonction = '$fonction' WHERE login = '$login'";
-		}
-		dbQuery($sql);
-		header('Location: ../views/?v=USERS&msg=' . urlencode('utilisateur modifié avec succès'));
-	}
-
-
-
-	exit();
-}
-
-function deleteUser()
-{
-	$login = $_GET['login'];
-
-	if ($_SESSION['crm_token'] != $_GET['token'])
-		die("Invalide token ");
-
-
-	$sql = "DELETE FROM users WHERE login = '$login'";
-	dbQuery($sql);
-	header('Location: ../views/?v=USERS&msg=' . urlencode('utilisateur supprimé avec succès'));
-	exit();
-}
 
 
 function updatePwd()
@@ -169,316 +76,127 @@ function updatePwd()
 	}
 	return $errorMessage;
 }
+///////
 
 
-
-
-////////////////////////////////
-
-
-
-function uploadMultiFiles($file)
+function init_config()
 {
-	$name = "";
-	header('Content-type: application/json');
 
-	$valid_exts = array('jpeg', 'jpg', 'png', 'gif', 'doc', 'txt', 'pdf'); // valid extensions
-	$max_size = 50000000 * 1024; // max file size (200kb)
-	$path = 'uploads/'; // upload directory
-	for ($a = 0; $a < count($_FILES[$file]["name"]); $a++) {
-
-		$path = 'uploads/'; // upload director
-
-		if (@is_uploaded_file($_FILES[$file]['tmp_name'][$a])) {
-			// get uploaded file extension
-			$ext = strtolower(pathinfo($_FILES[$file]['name'][$a], PATHINFO_EXTENSION));
-			// looking for format and size validity
-			if (in_array($ext, $valid_exts) and $_FILES[$file]['size'][$a] < $max_size) {
-				// unique file path
-				$path = $path . uniqid() . '.' . $ext;
-				// move uploaded file from temp to uploads directory
-
-				if (move_uploaded_file($_FILES[$file]['tmp_name'][$a], $path)) {
-
-
-					$status = 'images successfully uploaded!';
-					if ($a === 0)
-						$name = $path;
-					else
-						$name = $name . ',' . $path;
-				} else {
-					$status = 'Upload Fail: Unknown error occurred!';
-				}
-			} else {
-				$status = 'Upload Fail: Unsupported file format or It is too large to upload!';
-			}
-		} else {
-			$status = 'Upload Fail: File not uploaded!';
-		}
-
-		// echo out json encoded status
-		echo json_encode(array('status' => $status));
-	}
-	return ($name);
-}
-
-function uploadFile($file)
-{
-	header('Content-type: application/json');
-
-	$valid_exts = array('jpeg', 'jpg', 'png', 'gif', 'pdf', 'doc', 'txt', 'docx'); // valid extensions
-	$max_size = 5000000000 * 1024; // max file size (200kb)
-	$path = 'uploads/'; // upload directory
-	header('Content-type: application/json');
-
-	if (@is_uploaded_file($_FILES[$file]['tmp_name'])) {
-		// get uploaded file extension
-		$ext = strtolower(pathinfo($_FILES[$file]['name'], PATHINFO_EXTENSION));
-		// looking for format and size validity
-		if (in_array($ext, $valid_exts) and $_FILES[$file]['size'] < $max_size) {
-			// unique file path
-			$path = $path . uniqid() . '.' . $ext;
-			// move uploaded file from temp to uploads directory
-
-			if (move_uploaded_file($_FILES[$file]['tmp_name'], $path)) {
-
-
-				$status = 'images successfully uploaded!';
-				return ($path);
-			} else {
-				$status = 'Upload Fail: Unknown error occurred!';
-			}
-		} else {
-			$status = 'Upload Fail: Unsupported file format or It is too large to upload!';
-		}
-	} else {
-		$status = 'Upload Fail: File not uploaded!';
-	}
-
-	// echo out json encoded status
-	echo json_encode(array('status' => $status));
-	return ("");
-}
-
-
-
-
-
-function confirmerContrat()
-{	
 	if ($_SESSION['crm_token'] != $_POST['token'])
 		die("Invalide token");
 
+	$passwd = $_POST['passwd'];
+	$v_passwd = $_POST['v_passwd'];
+	$email = $_POST['email'];
+	$passwd = password_hash($_POST['passwd'], PASSWORD_DEFAULT);
 
-	// uploadMultiFiles("images");
+	$path = "/var/www/html/apache-monitor/auth/login.json";
+	$str_data = file_get_contents($path);
+	$data = json_decode($str_data, true);
 
-	$code_rdv = $_GET['code_rdv'];
-	$date_signature = "";
-	if (isset($_POST['date_signature']))
-		$date_signature = $_POST['date_signature'];
+	$data["email"] = $email;
+	$data["passwd"] = $passwd;
 
-	$nom_site = "";
-	if (isset($_POST['nom_site']))
-		$nom_site = $_POST['nom_site'];
-
-	$nom_domaine = "";
-	if (isset($_POST['nom_domaine']))
-		$nom_domaine = $_POST['nom_domaine'];
-
-	$second_domaine = "";
-	if (isset($_POST['']))
-		$second_domaine = $_POST['second_domaine'];
-
-	isset($_POST['creation_logo']) ?  $creation_logo = 1 : $creation_logo = 0;
-
-	$logo_existant = "";
-	if (isset($_FILES['logo_existant']))
-		$logo_existant = uploadFile('logo_existant');
-
-	$style_ecriture = "";
-	if (isset($_POST['style_ecriture']))
-		$style_ecriture = $_POST['style_ecriture'];
-
-	$couleurs_dominantes1 = "";
-	if (isset($_POST['couleurs_dominantes1']))
-		$couleurs_dominantes1 = $_POST['couleurs_dominantes1'];
-	$couleurs_dominantes2 = "";
-	if (isset($_POST['couleurs_dominantes2']))
-		$couleurs_dominantes2 = $_POST['couleurs_dominantes2'];
-	$couleurs_dominantes3 = "";
-	if (isset($_POST['couleurs_dominantes3']))
-		$couleurs_dominantes3 = $_POST['couleurs_dominantes3'];
-
-	$aspect_visuel = "";
-	if (isset($_POST['aspect_visuel']))
-		$aspect_visuel = $_POST['aspect_visuel'];
+	$fh = fopen("/var/www/html/apache-monitor/auth/login.json", 'w')
+		or die("Error opening output file");
+	fwrite($fh, json_encode($data, JSON_UNESCAPED_UNICODE));
+	fclose($fh);
 
 
-	$rubriques = "";
-	if (isset($_POST['rubriques']))
-		$rubriques = $_POST['rubriques'];
+	header('Location: ../views/?v=');
 
-
-
-	$histoire_societe = "";
-	if (isset($_POST['histoire_societe']))
-		$histoire_societe = $_POST['histoire_societe'];
-
-	$site_aime = "";
-	if (isset($_POST['site_aime']))
-		$site_aime = $_POST['site_aime'];
-	$site_concurrents = "";
-	if (isset($_POST['site_concurrents']))
-		$site_concurrents = $_POST['site_concurrents'];
-
-
-	$logos_partenaires = "";
-	if (isset($_FILES['logos_partenaires']))
-		$logos_partenaires = uploadFile('logos_partenaires');
-
-	isset($_POST['creation_texte']) ?  $creation_texte = 1 : $creation_texte = 0;
-
-	$texte_importer = "";
-	if (isset($_FILES['texte_importer']))
-		$texte_importer = uploadFile('texte_importer');
-
-	isset($_POST['gallerie_photos']) ?  $gallerie_photos = 1 : $gallerie_photos = 0;
-
-	$photos_importer = "";
-	if (isset($_FILES['photos_importer']))
-		$photos_importer = uploadMultiFiles('photos_importer');
-
-	$option_personnalisees = "";
-	if (isset($_POST['option_personnalisees']))
-		$option_personnalisees =  $_POST['option_personnalisees'];
-
-	$creation_reseaux = "";
-	if (isset($_POST['creation_reseaux']))
-		$creation_reseaux = $_POST['creation_reseaux'];
-
-	$expressions_cles = "";
-	if (isset($_POST['expressions_cles']))
-		$expressions_cles = $_POST['expressions_cles'];
-
-	$geolocalisation = "";
-	if (isset($_POST['geolocalisation']))
-		$geolocalisation = $_POST['geolocalisation'];
-
-	$commentaire_realisation = "";
-	if (isset($_POST['commentaire_realisation']))
-		$commentaire_realisation = $_POST['commentaire_realisation'];
-
-	$carte_identite = "";
-	if (isset($_FILES['carte_identite']))
-		$carte_identite = uploadFile('carte_identite');
-
-	$contrat_recto = "";
-	if (isset($_FILES['contrat_recto']))
-		$contrat_recto = uploadFile('contrat_recto');
-
-	$contrat_verso = "";
-	if (isset($_FILES['contrat_recto']))
-		$contrat_verso = uploadFile('contrat_verso');
-
-	$cheque = "";
-	if (isset($_FILES['cheque']))
-		$cheque = uploadFile('cheque');
-
-
-
-	$num_cheque = "";
-	if (isset($_POST['num_cheque']))
-		$num_cheque = $_POST['num_cheque'];
-
-	$rib = "";
-	if (isset($_FILES['rib']))
-		$rib = uploadFile('rib');
-
-	$mandats = "";
-	if (isset($_FILES['mandats']))
-		$mandats = uploadFile('mandats');
-
-	$proces_verbal = "";
-	if (isset($_FILES['proces_verbal']))
-		$proces_verbal = uploadFile('proces_verbal');
-
-
-	$sql = "INSERT INTO contrats(code_rdv , date_signature , nom_site , nom_domaine , second_domaine ,
-	 creation_logo , logo_existant , style_ecriture , couleurs_dominantes1 ,
-	 couleurs_dominantes2 , couleurs_dominantes3 , aspect_visuel , histoire_societe ,
-	 site_aime , site_concurrents , logos_partenaires , creation_texte , texte_importer ,
-	 gallerie_photos , photos_importer , option_personnalisees , creation_reseaux , expressions_cles ,
-	 geolocalisation , commentaire_realisation , carte_identite , contrat_recto , contrat_verso ,cheque,num_cheque, rib ,
-	 mandats , proces_verbal,
-	rubriques)
-	 
-	 VALUES ('$code_rdv','$date_signature','$nom_site','$nom_domaine','$second_domaine','$creation_logo','$logo_existant',
-	 '$style_ecriture','$couleurs_dominantes1','$couleurs_dominantes2','$couleurs_dominantes3','$aspect_visuel',
-	 '$histoire_societe','$site_aime','$site_concurrents','$logos_partenaires','$creation_texte','$texte_importer',
-	 '$gallerie_photos','$photos_importer','$option_personnalisees','$creation_reseaux','$expressions_cles','$geolocalisation',
-	 '$commentaire_realisation','$carte_identite','$contrat_recto','$contrat_verso','$cheque','$num_cheque','$rib',
-	 '$mandats','$proces_verbal','$rubriques')";
-
-	dbQuery($sql);
-
-	$sql2 	=  "UPDATE rendez_vous SET status_rdv = 'confirmed_contrat' WHERE code_rdv = '$code_rdv'";
-	dbQuery($sql2);
-
-	exit(0);
 }
 
-
-
-function accepterContrat()
+function startService()
 {
-	if ($_SESSION['crm_token'] != $_POST['token'])
-		die("Invalide token");
-	$code_rdv = $_GET['code_rdv'];
-	$login_devtech = $_POST['login_devtech'];
-	$delai =  date("Y-m-d");
-	$delai = date('Y-m-d', strtotime($delai. ' + '.$_POST['delai'].' days')); 
+	$login = $_POST['login'];
+	$passwd = $_POST['passwd'];
+	// $path = getenv("AM_LOCATION")."config.json";
+	$path = "/var/www/html/apache-monitor/config.json";
+	$str_data = file_get_contents($path);
+	$data = json_decode($str_data, true);
+	$data["access"]["login"] = $login;
+	$data["access"]["passwd"] = $passwd;
 
-	if (
-		$_SESSION['crm_fd_user']['fonction'] == 'manager' ||
-		$_SESSION['crm_fd_user']['fonction'] == 'admin'
-	) {
-		$sql	= "UPDATE rendez_vous SET  status_rdv= 'dev_site'  WHERE code_rdv = '$code_rdv'";
-		dbQuery($sql);
-		$sql	= "UPDATE contrats SET  login_devtech= '$login_devtech',  delai = '$delai'  WHERE code_rdv = '$code_rdv'";
-		dbQuery($sql);
-		header('Location: ../views/?v=&msg=' . urlencode('contrat est pas valideè avec succès'));
-	}
-	header('Location: ../views/?v=&msg=' . urlencode('contrat n\'est pas valideè'));
+	$fh = fopen("/var/www/html/apache-monitor/config.json", 'w')
+		or die("Error opening output file");
+	fwrite($fh, json_encode($data, JSON_UNESCAPED_UNICODE));
+	fclose($fh);
+	header('Location: ../views/?v=services&msg=' . urlencode('The Services has been enabled'));
 }
 
-
-
-function updateProject()
+function stopService()
 {
-	if ($_SESSION['crm_token'] != $_POST['token'])
-		die("Invalide token");
-	$code_rdv = $_GET['code_rdv'];
-	$status_rdv = $_GET['status_rdv'];
 
-	if ($status_rdv == 'dev_site')
-		$status_rdv = 'cr_contenue';
-	elseif ($status_rdv == 'cr_contenue')
-		$status_rdv = 'optimisation';
+	$cmd = $_POST['cmd'];
+	$i = $_POST['i'];
 
-	elseif ($status_rdv == 'optimisation')
-		$status_rdv = 'cr_reseaux';
+	// $path = getenv("AM_LOCATION")."config.json";
+	$path = "/var/www/html/apache-monitor/config.json";
+	$str_data = file_get_contents($path);
+	$data = json_decode($str_data, true);
 
-	elseif ($status_rdv == 'cr_reseaux')
-		$status_rdv = 'projet_livre';
+	// Modify the value, and write the structure to a file "data_out.json"
+	//
+	$data["services"][$i]["state"] = "stopped";
 
-	if (
-		$_SESSION['crm_fd_user']['fonction'] == 'manager' ||
-		$_SESSION['crm_fd_user']['fonction'] == 'developpeur_tech'
-	) {
-		$sql	= "UPDATE rendez_vous SET  status_rdv= '$status_rdv'  WHERE code_rdv = '$code_rdv'";
-		dbQuery($sql);
-		header('Location: ../views/?v=&msg=' . urlencode('projet est modifiè avec  succès'));
-	}
-	header('Location: ../views/?v=&msg=' . urlencode('projet n\'est pas modifiè'));
+	$fh = fopen("/var/www/html/apache-monitor/config.json", 'w')
+		or die("Error opening output file");
+	fwrite($fh, json_encode($data, JSON_UNESCAPED_UNICODE));
+	fclose($fh);
+
+	// exec("./home/rahimi/Desktop/sc.sh");
+
+	header('Location: ../views/?v=services&msg=' . urlencode('The Services has been disabled'));
 }
 
+function configuration()
+{
+	$percentage = $_POST['percentage'];
+	$email = $_POST['email'];
+	$sms_api_token = $_POST['sms_api_token'];
+	$sms_api_tel = $_POST['sms_api_tel'];
+	$cron_location = $_POST['cron_location'];
+
+
+	$path = "/var/www/html/apache-monitor/config.json";
+	$str_data = file_get_contents($path);
+	$data = json_decode($str_data, true);
+
+	$data["percentage"] = $percentage;
+	$data["email"] = $email;
+	$data["sms_api_token"] = $sms_api_token;
+	$data["sms_api_tel"] = $sms_api_tel;
+	$data["cron_location"] = utf8_encode($cron_location);
+
+	$fh = fopen("/var/www/html/apache-monitor/config.json", 'w')
+		or die("Error opening output file");
+	fwrite($fh, json_encode($data, JSON_UNESCAPED_UNICODE));
+	fclose($fh);
+
+
+	header('Location: ../views/?v=configuration');
+}
+
+function newApp()
+{
+
+	$name = $_POST['name'];
+	$string = $_POST['string'];
+	$url = $_POST['url'];
+
+	$new_app = array("name" => $name,"string" => $string,"url" => $url,"status" => "...");
+	$path = "/var/www/html/apache-monitor/config.json";
+	$str_data = file_get_contents($path);
+	$data = json_decode($str_data, true);
+
+	$data["apps"][] = $new_app;
+
+	$fh = fopen("/var/www/html/apache-monitor/config.json", 'w')
+		or die("Error opening output file");
+	fwrite($fh, json_encode($data, JSON_UNESCAPED_UNICODE));
+	fclose($fh);
+
+
+	header('Location: ../views/?v=applications');
+}

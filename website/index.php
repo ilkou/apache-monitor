@@ -4,8 +4,8 @@ require_once './library/functions.php';
 
 
 // check if user is connected( check $_SESSION)
-// checkFDUser();
-
+checkFDUser();
+checkInitConfig();
 $content = 'views/dashboard.php';
 
 $pageTitle = '';

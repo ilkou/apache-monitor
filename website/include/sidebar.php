@@ -23,8 +23,15 @@
                         <a href="<?php echo WEB_ROOT ?>views/?v=dashboard"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a>
                     </li>
                     <li>
-                        <a href="<?php echo WEB_ROOT ?>views/?v=services"><i class="fa fa-cogs"></i> <span class="nav-label">services</span></a>
+                        <a href="<?php echo WEB_ROOT ?>views/?v=services"><i class="fa fa-cogs"></i>
+                         <span class="nav-label">Services</span></a>
                     </li>
+
+                    <li>
+                        <a href="<?php echo WEB_ROOT ?>views/?v=applications"><i class="fa fa-cogs"></i> 
+                        <span class="nav-label">Application</span></a>
+                    </li>
+
                     <li>
                         <a href="<?php echo WEB_ROOT ?>views/?v=configuration"><i class="fa fa-wrench"></i> <span class="nav-label">configuration</span></a>
                     </li>

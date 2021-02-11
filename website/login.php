@@ -4,11 +4,12 @@ require_once './library/functions.php';
 
 
 $errorMessage = '&nbsp;';
-if (isset($_POST['login']) && isset($_POST['pwd'])) {
-  $result = doLogin();
-  if ($result != '') {
-    $errorMessage = $result;
-  }
+if (isset($_POST['email']) && isset($_POST['passwd'])) {
+    
+    $result = doLogin();
+    if ($result != '') {
+        $errorMessage = $result;
+    }
 }
 
 ?>
@@ -17,16 +18,16 @@ if (isset($_POST['login']) && isset($_POST['pwd'])) {
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>server monitoring | Login</title>
+    <title>server monitoring | Login</title>
 
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
 
-  <link href="css/animate.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 
@@ -43,16 +44,16 @@ if (isset($_POST['login']) && isset($_POST['pwd'])) {
             <h3>Welcome to Ensak Server Monitoring</h3>
             <p></p>
             <p>Login in. To access to your server.</p>
-            <form class="m-t" role="form" action="index.html">
-            <input type="text" value="dsdsdsd" hidden>
+            <form class="m-t" role="form" method="post" >
+                <input  type="text" value="dsdsdsd" hidden>
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Username" required="">
+                    <input name="email" type="email" class="form-control" placeholder="email" required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" required="">
+                    <input type="password"  name="passwd"class="form-control" placeholder="Password" required="">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
-<!-- 
+                <!-- 
                 <a href="#"><small>Forgot password?</small></a>
                 <p class="text-muted text-center"><small>Do not have an account?</small></p>
                 <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a> -->
