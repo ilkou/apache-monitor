@@ -2,6 +2,8 @@
 require_once './library/config.php';
 require_once './library/functions.php';
 
+checkRegester();
+
 $_SESSION['crm_token'] = md5(uniqid(mt_rand(), true));
 // $errorMessage = '&nbsp;';
 // if (isset($_POST['login']) && isset($_POST['pwd'])) {
@@ -47,58 +49,7 @@ $_SESSION['crm_token'] = md5(uniqid(mt_rand(), true));
                         <form method="post" action="<?php echo WEB_ROOT; ?>views/process.php?cmd=init_config">
                             <input type="text" name="token" value="<?= $_SESSION['crm_token'] ?>" hidden>
 
-                            <div class="form-group  row">
-                                <label class="col-sm-3 col-form-label">Database name :</label>
-                                <div class="col-sm-9">
-                                    <input type="text"  name="db_name" value="db_ensak-server_monitoring" class="form-control">
-                                    <span class="form-text m-b-none"><strong>NB</strong> : the old datebase with the same name will automaticly removed</span>
-                                </div>
-                            </div>
-                            <div class="form-group  row">
-                                <label class="col-sm-3 col-form-label">tables prefix :</label>
-                                <div class="col-sm-9">
-                                    <input type="text"  name="tb_prefix" value="esm" placeholder="ensak-server_monitoring" class="form-control">
-                                    <span class="form-text m-b-none"><strong>NB</strong> : the old tables with the same names will automaticly removed</span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Database Host :</label>
-                                <div class="col-sm-9">
-                                    <input type="text"  name="db_host" value="localhost" class="form-control" name="password">
-                                </div>
-                            </div>
-                            <div class="form-group  row">
-                                <label class="col-sm-3 col-form-label">Database Username :</label>
-                                <div class="col-sm-9">
-                                    <input type="text"  name="db_username" value="root" class="form-control">
-                                    <span class="form-text m-b-none">The Username of the database</span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Database Password :</label>
-                                <div class="col-sm-9">
-                                    <input type="password"  name="db_passwd" class="form-control" name="password">
-                                    <span class="form-text m-b-none">The Password of the database</span>
-                                </div>
-                            </div>
-
-
-
-
-
-                            <div class="hr-line-dashed"></div>
-
-
-
-                            <div class="form-group  row">
-                                <label class="col-sm-3 col-form-label">Username :</label>
-                                <div class="col-sm-9">
-                                    <input type="text"  name="username" class="form-control">
-                                    <span class="form-text m-b-none">the username </span>
-                                </div>
-
-                            </div>
-
+                
                             <div class="form-group  row">
                                 <label class="col-sm-3 col-form-label">email :</label>
                                 <div class="col-sm-9">

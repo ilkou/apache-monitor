@@ -1,0 +1,20 @@
+[
+	{
+		"usage": "3.135.196.186:1337/hooks/r?t=12345&s=1",
+		"id": "r",
+		"execute-command": "/home/ilkou/apache-monitor/restart_services.sh",
+		"command-working-directory": "/home/ilkou/apache-monitor",
+		"response-message": "Apache-monitor: Restart Services",
+		"pass-arguments-to-command":
+		[
+			{
+				"source": "url",
+				"name": "t"
+			},
+			{
+				"source": "url",
+				"name": "s"
+			}
+		]
+	}
+]

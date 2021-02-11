@@ -1,0 +1,78 @@
+{
+	"dependencies": [
+		{
+			"jq": [
+				"yum install epel-release -y",
+				"yum install jq -y"
+			]
+		},
+		{
+			"cron": [
+				"yum install cronie"
+			]
+		},
+		{
+			"php": [
+				"yum install php"
+			]
+		},
+		{
+			"Go": [
+				"curl https:\/\/raw.githubusercontent.com\/canha\/golang-tools-install-script\/master\/goinstall.sh | bash",
+				"source ~\/.bashrc"
+			]
+		},
+		{
+			"Git": [
+				"yum install git"
+			]
+		},
+		{
+			"webhook": [
+				"go get github.com\/adnanh\/webhook"
+			]
+		}
+	],
+	"services": [
+		{
+			"service": "httpd",
+			"status": "enabled",
+			"state": "started",
+			"notified": "yes"
+		},
+		{
+			"service": "tomcat.service",
+			"status": "enabled",
+			"state": "started",
+			"notified": "yes"
+		},
+		{
+			"service": "mysql",
+			"status": "disabled",
+			"state": "started",
+			"notified": "no"
+		}
+	],
+	"apps": [
+		{
+			"name": "app1",
+			"url": "urlX",
+			"string": "verfiy string1",
+			"status": "up",
+			"notified": "no"
+		},
+		{
+			"name": "app2",
+			"url": "urlY",
+			"string": "verfiy string2",
+			"status": "down",
+			"notified": "yes"
+		}
+	],
+	"disk_space_notified": "no",
+	"percentage": "90",
+	"email": "apache.monitor.ensakh@gmail.com",
+	"sms_api_token": "sfjsdnlf",
+	"sms_api_tel": "+212655246226",
+	"cron_location": "\/var\/spool\/cron\/root"
+}

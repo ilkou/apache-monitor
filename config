@@ -1,3 +1,14 @@
+#jq:
+#yum install epel-release -y
+#yum install jq -y
+#
+#webhook
+#yum install epel-release -y
+#yum install snapd -y
+#systemctl enable --now snapd.socket
+#ln -s /var/lib/snapd/snap /snap
+#snap install webhook -y
+#
 #AssociativeArray(command_name=>command) of dependencies:
 declare -A AM_dependencies=(
 	[Crontab]=crontab
@@ -20,4 +31,7 @@ declare -A AM_webapps=(
 )
 
 #Percentage used to alert you when the disk is almost full
-AM_percentage=90
+export AM_percentage=90
+
+#SMS API TOKEN
+export AM_SMS_API_TOKEN="dnZzbjcwNjM6MjVTeDgwSGM="

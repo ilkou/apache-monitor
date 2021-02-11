@@ -212,12 +212,18 @@ if (!defined('WEB_ROOT')) {
 <script src="<?php  echo WEB_ROOT ?>js/plugins/flot/jquery.flot.time.js"></script>
 <script src="<?php echo WEB_ROOT ?>js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
 
+<?php 
+	$path = "/var/www/html/apache-monitor/config.json";
+	$str_data = file_get_contents($path);
+	$data = json_decode($str_data, true);
+?>
+
 <script>
          $("#ionrange_3").ionRangeSlider({
             skin: "flat",
             min: 0,
             max: 100,
-            from: 80,
+            from: <?php echo $data['percentage']?>,
             postfix: "%",
             grid: true
         });

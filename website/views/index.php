@@ -16,11 +16,18 @@ switch ($view) {
 		$content 	= 'configuration.php';
 		$pageTitle 	= 'configuration';
 		break;
-
+		
 		case 'change_password':
 			$content 	= 'change_password.php';
 			$pageTitle 	= 'change password';
 			break;
+
+			case 'applications':
+				$content 	= 'applications.php';
+				$pageTitle 	= 'Application';
+				break;
+
+
 	default:
 		$content 	= 'dashboard.php';
 		$pageTitle 	= 'Tableau de bord';
