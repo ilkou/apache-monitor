@@ -167,7 +167,7 @@ function configuration()
 	$data["email"] = $email;
 	$data["sms_api_token"] = $sms_api_token;
 	$data["sms_api_tel"] = $sms_api_tel;
-	$data["cron_location"] = utf8_encode($cron_location);
+	$data["cron_location"] = utf8_encode($cron_location); //stripslashes($e);
 
 	$fh = fopen("/var/www/html/apache-monitor/config.json", 'w')
 		or die("Error opening output file");
