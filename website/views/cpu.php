@@ -2,6 +2,12 @@
     <div class="ibox ">
         <div class="ibox-title">
             <h5>CPU Usage</h5>
+            <h3> shapeSpace_system_load :<?php
+
+                echo shapeSpace_system_load();
+
+                ?>
+        </h3>
             <div class="ibox-tools">
                 <a class="collapse-link">
                     <i class="fa fa-chevron-up"></i>
@@ -42,7 +48,7 @@
         // Determine how many data points to keep based on the placeholder's initial size;
         // this gives us a nice high-res plot while avoiding more than one point per pixel.
 
-        var maximum = container.outerWidth() / 2 || 300;
+        var maximum = container.outerWidth() / 2.0 || 300.0;
 
         //
 
@@ -55,9 +61,13 @@
             }
 
             while (data.length < maximum) {
-                var previous = data.length ? data[data.length - 1] : 50;
-                var y = previous + Math.random() * 10 - 5;
-                data.push(y < 0 ? 0 : y > 100 ? 100 : y);
+                // var previous = data.length ? data[data.length - 1] : 50;
+                // var y = previous + Math.random() * 10 - 5;
+                // data.push(y < 0 ? 0 : y > 100 ? 100 : y);
+                
+                data.push(<?php echo shapeSpace_system_load2();?>);
+            //   console.log(<?php echo shapeSpace_system_load2();?>);
+            //   await sleep(2);
             }
 
             // zip the generated y values with the x values
