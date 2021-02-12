@@ -91,7 +91,7 @@ $i = 0;
                     <div class="modal-content animated bounceInRight">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title">MAdd new Application</h4>
+                            <h4 class="modal-title">Add new Application</h4>
                         </div>
                         <form action="<?php echo WEB_ROOT; ?>views/process.php?cmd=newApp" method="post">
                         <div class="modal-body">

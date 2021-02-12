@@ -118,5 +118,5 @@ function getApplications()
 	$str_data = file_get_contents($path);
 	$data = json_decode($str_data, true);
 
-	return $data["services"];
+	return $data["apps"];
 }
