@@ -24,11 +24,11 @@ sh index.sh -y
 
 ## TO-DO
 
-* Check disk space with df ✅ => disk free
+* Check disk space with df ✅ 
 
 * Check running processes for => apache - tomcat - mysql ✅
 
-* Push notifications (SMS) ❌ => platform API integration
+* Push notifications (SMS) ✅ => D7SMS API
 
 * Check running apps (wget/curl) ✅
 
@@ -62,6 +62,10 @@ sh index.sh -y
 * [JQ filter](https://jqplay.org/)
 
 * [JQ Home](https://stedolan.github.io/jq/)
+
+### TO ADD
+
+verfiy if app is down for everyone: [using this API](https://downforeveryoneorjustme.com)
 
 ### Test some features with docker
 
