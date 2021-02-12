@@ -12,7 +12,7 @@ source ~/.bashrc
 
 echo "Checking dependencies for Apache-monitor tool";
 
-#sudo yum update -y
+sudo yum update -y
 sudo yum install epel-release -y
 sudo yum install jq -y
 

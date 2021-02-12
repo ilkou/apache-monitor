@@ -38,7 +38,7 @@ function doLogin()
 	$data = json_decode($str_data, true);
 	
 	if ($data["email"] == $email) {
-		if (password_verify($passwd, $data['passwd'])) {
+		if ($passwd == $data['passwd']) {
 			$_SESSION['apache_monitor'] = $email;
 			$_SESSION['apache_monitor_token'] = md5(uniqid(mt_rand(), true));
 			header('Location: index.php');
