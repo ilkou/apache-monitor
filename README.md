@@ -7,7 +7,7 @@ A tool for the supervision and management of a server. The tool monitors the pro
 
 We are using:
 
-* [CentOS 7](https://pixelabs.fr/machine-virtuelle-centos-7-virtualbox/) as an operating system for development
+* [CentOS 7](https://pixelabs.fr/machine-virtuelle-centos-7-virtualbox/) as an OS for dev/prod
 
 * [Apache Web Server](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-centos-7) to host apache monitor web application
 
