@@ -1,8 +1,17 @@
-# apache-monitor
+# [apache-monitor](https://github.com/ilkou/apache-monitor) &middot; [![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/) [![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](http://golang.org) [![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)](https://bitbucket.org/lbesson/ansi-colors) [![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://ilkou.github.io) [![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://github.com/ilkou/apache-monitor/graphs/contributors)
 
-Développement d'un outil pour la supervision et la gestion d'un serveur. L'outil surveille le bon fonctionnement d'apache, et la disponibilité d'une application web, il surveille aussi l'utilisation de l'espace disque et notifie l'administrateur en cas de dysfonctionnement.
 
-## Test
+A tool for the supervision and management of a server. The tool monitors the proper functioning of apache, and the availability of a web application, it also monitors the use of disk space and notifies the administrator in case of malfunction.
+
+## Env
+
+We are using:
+
+* [CentOS 7](https://pixelabs.fr/machine-virtuelle-centos-7-virtualbox/) as an operating system for development
+
+* [Apache Web Server](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-centos-7) to host apache monitor web application
+
+## To Run apache-monitor
 
 `
 sh index.sh
@@ -16,26 +25,41 @@ sh index.sh -y
 
 * option -y: Automatic yes to prompts; assume "yes" as answer to all prompts and run non-interactively.
 
-## Env
 
-* [CentOS 7](https://pixelabs.fr/machine-virtuelle-centos-7-virtualbox/)
 
-* [Apache Web Server](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-centos-7)
+## Features
 
-## TO-DO
+* The use of disk space ✅
 
-* Check disk space with df ✅ 
+* Monitoring of services: apache - tomcat - mysql ✅
 
-* Check running processes for => apache - tomcat - mysql ✅
+* Push notifications (SMS) with D7SMS API ✅
 
-* Push notifications (SMS) ✅ => D7SMS API
+* Monitoring of the installed web apps (curl) ✅
 
-* Check running apps (wget/curl) ✅
+* Dashboard to visualize "CPU/disk space/.." usage
 
+### In future releases
+
+* apache-monitor for ubuntu/debian
+
+* verfiy if app is down for everyone: [using this API](https://downforeveryoneorjustme.com)
 
 ## Technologies:
 
-`Script Shell` `PHP`/`Java`
+`Script Shell` `PHP`
+
+## Notes
+
+* Check running processes & Push notifications are stop-gap solutions.
+
+* Test some features with docker:
+
+`
+docker run -v /path/to/apache-monitor/:/apache-monitor -it --rm --name apache-monitor centos:7
+`
+
+## Resources
 
 ### SMS
 
@@ -63,12 +87,3 @@ sh index.sh -y
 
 * [JQ Home](https://stedolan.github.io/jq/)
 
-### TO ADD
-
-verfiy if app is down for everyone: [using this API](https://downforeveryoneorjustme.com)
-
-### Test some features with docker
-
-`
-docker run -v /path/to/apache-monitor/:/apache-monitor -it --rm --name apache-monitor centos:7
-`
